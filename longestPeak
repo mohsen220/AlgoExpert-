@@ -1,0 +1,34 @@
+function longestPeak(array) {
+  
+	let longestPeakLength = 0; 
+	i = 1; 
+	let results = []; 
+	
+	while(i < array.length -1){
+		let isPeak = array[i-1] < array[i] && array[i] > array[i+1]; 
+		
+		if(!isPeak){
+			i++; 
+			continue; 
+		}
+		
+		let leftindex = i-2; 
+		while(leftindex >=0 && array[leftindex] < array[leftindex +1] ){
+			leftindex --; 
+		}
+		
+		let rightindex = i+2; 
+		while(rightindex < array.length && array[rightindex] < array[rightindex -1]){
+			rightindex++; 
+		}
+		
+		let currentPeakLength = rightindex - leftindex -1; 
+	  longestPeakLength = Math.max(longestPeakLength, currentPeakLength); 
+		i= rightindex; 
+	}
+	
+	return longestPeakLength; 
+}
+
+// Do not edit the line below.
+exports.longestPeak = longestPeak;
